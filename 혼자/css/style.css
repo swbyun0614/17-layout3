@@ -77,10 +77,10 @@ header nav .gnb {
         }
         header nav .gnb .lnb ul li a {
             display: block;
-            padding: 8px 0; transition: 0.2s;
+            padding: 8px 0; transition: 0.1s;
         }
         header nav .gnb .lnb ul li a:hover {
-            font-weight: bold; transition: 0.2s;
+            font-weight: bold; transition: 0.1s;
         }
 
     header nav .gnb li:last-child .lnb {
@@ -106,7 +106,10 @@ header nav .gnb {
 }
 .hero ul li .textbox a {
     display: inline-block; text-align: center;
-    font-size: 20px; color: #fff; background: #F0620A; padding: 8px 26px; margin-top: 30px; border-radius: 6px;
+    font-size: 20px; color: #fff; background: #F0620A; padding: 8px 26px; margin-top: 30px; border-radius: 6px; transition: 0.3s;
+}
+.hero ul li .textbox a:hover {
+    background: #cf550a; transition: 0.3s;
 }
 
 .section_box {}

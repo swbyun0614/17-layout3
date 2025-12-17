@@ -4,7 +4,7 @@
 @import url(reset.css);
 
 body {
-    font-family: 'Pretendard'; overflow-x: hidden;
+    font-family: 'Pretendard';
 }
 
 .container {
@@ -15,6 +15,7 @@ header {
     height: 178px;
 }
 header .topset {
+    position: relative;
     display: flex; justify-content: space-between; 
     padding: 0 6.5vw;
 }
@@ -72,11 +73,17 @@ header nav .gnb .lnb ul {
     padding: 5px 0 5px 38px;
 }
 header nav .gnb .lnb ul li {
-    width: 50%; font-size: 18px; text-align: center;
+    width: 50%; font-size: 18px; text-align: center; transition: 0.2s;
+}
+header nav .gnb .lnb ul li:hover {
+    background: #183d54; transition: 0.2s; border-radius: 5px;
 }
 header nav .gnb .lnb ul li a {
     display: block;
-    padding: 5px 0;
+    padding: 5px 0; transition: 0.2s;
+}
+header nav .gnb .lnb ul li:hover a {
+    color: #fff; transition: 0.2s;
 }
 
 header nav .gnb li:last-child .lnb {
@@ -85,7 +92,7 @@ header nav .gnb li:last-child .lnb {
 
 .hero {
     position: relative;
-    height: 650px; background: #eee;
+    height: 650px; background: #eee; overflow: hidden;
 }
 .hero .textbox {
     position: absolute; left: 50%; top: 50%;
@@ -93,21 +100,37 @@ header nav .gnb li:last-child .lnb {
     transform: translate(-130%, -50%); /* 본인 크기 기준으로 (X, y축으로) 움직이는 */
 }
 .hero .textbox strong {
-    font-size: 40px; color: #fff; font-weight: 700; line-height: 1.4;
+    position: relative;
+    display: block;
+    font-size: 40px; color: #fff; font-weight: 700; line-height: 1.4; opacity: 0;
+    animation: heroText 2s forwards;
 }
 .hero .textbox p {
-    font-size: 18px; color: #fff; line-height: 1.6; margin-top: 30px;
+    position: relative; left: 200px;
+    font-size: 18px; color: #fff; line-height: 1.6; margin-top: 30px; opacity: 0;
+    animation: heroText 2s forwards; animation-delay: 0.3s;
 }
 .hero .textbox .btn {
+    position: relative; left: 200px;
     display: inline-block;
-    font-size: 20px; color: #fff; padding: 10px 26px; background: #f0620a; margin-top: 40px;
+    font-size: 20px; color: #fff; padding: 10px 26px; background: #f0620a; margin-top: 40px; opacity: 0;
+    animation: heroText 2s forwards;  animation-delay: 0.6s;
 }
+@keyframes heroText {
+    0% {
+        left: 200px;
+    }
+    100% {
+        left: 0; opacity: 1;
+    }
+}
+
 .hero ul {
     display: flex;
     width: 300%; height: 100%; transition: 0.5s;
 }
 .hero ul li {
-    width: 100%; height: 100%;
+    width: 100%; height: 100%; overflow: hidden;
 }
 .hero ul li:nth-child(2) {
     background: lightgreen;
@@ -117,25 +140,219 @@ header nav .gnb li:last-child .lnb {
 }
 .hero ul li img {
     width: 100%; height: 100%; object-fit: cover;
+    animation: heroImg 10s forwards;
+}
+@keyframes heroImg {
+    0% {transform: scale(1.1);}
+    100% {transform: scale(1);}
 }
 
 .hero .arrow_box {
     position: absolute; top: 50%;
-    width: 100%;
+    width: 100%; color: #fff;
 }
 .hero .arrow_box div {
     position: absolute;
+    display: flex; justify-content: center; align-items: center;
     width: 50px; height: 50px; cursor: pointer; transform: translate(0, -50%);
 }
 .hero .arrow_box div.btn_prev {
-    left: 0; background: red;
+    left: 100px; font-size: 40px;
 }
 .hero .arrow_box div.btn_next {
-    right: 0; background: blue;
+    right: 100px; font-size: 40px;
 }
 
-.section_box {}
+.section1 .container {
+    display: flex; gap: 50px; justify-content: space-between;
+    width: 1320px; margin: 0 auto; margin-top: 150px;
+}
+.section1 .container .recent_board {
+    flex-grow: 1;
+}
+    .section1 .container .recent_board h2 {
+        display: flex; justify-content: space-between;
+        font-size: 32px; margin-bottom: 30px;
+    }
+    .section1 .container .recent_board h2 a {
+        position: relative;
+        width: 36px;
+    }
+    
+    .section1 .container .recent_board h2 a::before,
+    .section1 .container .recent_board h2 a::after {
+        content: "";
+        position: absolute; left: 50%; top: 50%;
+        width: 30px; height: 1px; background: #000; transform: translate(-50%, -50%); transition: 0.2s;
+    }
+    .section1 .container .recent_board h2 a::after {
+        transform: translate(-50%, -50%) rotate(90deg);
+    }
+    .section1 .container .recent_board h2 a:hover::before {
+        transform: translate(-50%, -50%) rotate(180deg);
+    }
+    .section1 .container .recent_board h2 a:hover::after {
+        transform: translate(-50%, -50%) rotate(270deg);
+    }
+
+        .section1 .container .recent_board ul li {
+            font-size: 20px; line-height: 40px; border-bottom: 1px solid #eee; margin-bottom: 15px; transition: 0.2s;
+        }
+        .section1 .container .recent_board ul li a {
+            display: flex; justify-content: space-between; gap: 10px;
+        }
+            .section1 .container .recent_board ul li a .title {
+                flex-grow: 1; /* title이 남은 공간을 전부 쓰게 하기 */
+                text-overflow: ellipsis; overflow: hidden; white-space: nowrap; /* 텍스트가 일정 길이를 넘어가면 말줄임표로 표시 */
+                width: 280px;
+            }
+
+
+    .section2 .container {
+        margin-top: 150px;
+    }
+    .section2 .container h2 {
+        text-align: center;
+    }
+    .section2 .container h2 strong {
+        display: block;
+        font-size: 32px; margin-bottom: 20px;
+    }
+    .section2 .container h2 span {
+        display: block;
+        font-size: 24px; color: #898989;
+    }
+    .section2 .container .content {
+        display: flex; justify-content: space-between; gap: 50px; flex-wrap: wrap;
+        margin-top: 60px;
+    }
+    .section2 .container .content li {
+        position: relative;
+        width: 30%; height: 450px; flex-grow: 1; background: #000; overflow: hidden;
+    }
+    .section2 .container .content li a img {
+        width: 100%; height: 100%; object-fit: cover; transition: 0.2s;
+    }
+    .section2 .container .content li:hover a img {
+        transform: scale(1.1); transition: 0.2s;
+    }
+    .section2 .container .content li a .textbox {
+        position: absolute; left: 0; top: 0;
+        display: flex; justify-content: center; align-items: center; flex-direction: column;
+        width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); text-align: center; opacity: 0; transition: 0.3s;
+    }
+    .section2 .container .content li a .textbox:hover {
+        opacity: 1; transition: 0.3s;
+    }
+    .section2 .container .content li a .textbox strong {
+        color: #fff; opacity: 0; transition: 0.3s; margin-top: 50px; margin-bottom: 20px; font-size: 24px;
+    }
+    .section2 .container .content li a .textbox:hover strong {
+        margin-top: 0; opacity: 1;
+    }
+    .section2 .container .content li a .textbox p {
+        color: #fff; opacity: 0; transition: 0.3s; font-size: 16px;
+    }
+    .section2 .container .content li a .textbox:hover p {
+        opacity: 1;
+    }
+
+    .section3 .container {
+        margin-top: 150px;
+    }
+    .section3 .container h2 {
+        font-size: 32px; margin-bottom: 60px; text-align: center;
+    }
+    .section3 .container .content {
+        display: flex; gap: 50px;
+    }
+    .section3 .container .content li {
+        position: relative;
+        width: 855px; height: 441px; overflow: hidden;
+    }
+    .section3 .container .content li img {
+        width: 100%; height: 100%; object-fit: cover; transition: 0.2s;
+    }
+    .section3 .container .content li:hover img {
+        transform: scale(1.1);
+    }
+    .section3 .container .content li iframe {
+        width: 100%; height: 100%; object-fit: cover;
+    }
+    .section3 .container .content li a .textbox {
+        position: absolute; left: 0; top: 0;
+        display: flex; justify-content: center; align-items: center;
+        width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); color: #fff; font-size: 24px;
+    }
+
+    .section4 {
+        background: #064570;
+    }
+    .section4 .container {
+        margin-top: 150px; padding: 150px 0;
+    }
+    .section4 h2 {
+        text-align: center; color: #fff; margin-bottom: 60px;
+    }
+    .section4 .content {
+        display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 270px); gap: 50px;
+    }
+    .section4 .content li {
+        background: #fff;
+    }
+    .section4 .content li a {
+        display: flex; flex-direction: column; justify-content: space-between; align-items: center; gap: 50px;
+        height: 100%; padding: 30px 20px; box-sizing: border-box; font-size: 18px;
+    }
+    .section4 .content .textbox h3 {
+        font-size: 20px; text-align: center; margin-bottom: 20px;
+    }
+
+    .section4 .content li:nth-child(1) {
+        grid-row: span 2; /* 1번째 li를 아래 방향으로 2칸 합침 */
+    }
+    .section4 .content li:nth-child(1) a {
+        padding: 100px 20px;
+    }
+    .section4 .content li:nth-child(5) {
+        grid-column: span 2; /* 5번째 li를 오른쪽 방향으로 2칸 합침 */
+    }
+    .section4 .content li:nth-child(5) a {
+        flex-direction: row;
+    }
+    .section4 .content li:nth-child(9) {
+        grid-column: span 2; /* 9번째 li를 오른쪽 방향으로 2칸 합침 */
+    }
+    .section4 .content li:nth-child(9) a {
+        flex-direction: row;
+    }
+    
+    .section4 table {
+        width: 100%; height: 500px; border-spacing: 50px;
+    }
+    .section4 table td {
+        border: 1px solid #fff;
+    }
+    .section4 table td:nth-child(1) {
+        width: 397px; height: 640px;
+    }
+    .section4 table td:nth-child(2) {
+        width: 402px; height: 325px;
+    }
+    .section4 table td.td13 {
+        width: 402px;
+    }
+    .section4 table td.td22 {
+        width: 855px; height: 265px;
+    }
+    .section4 table td.td31 {
+        height: 360px;
+    }
+
+    .section4 .content li a {}
+    
 
 footer {
+    display: flex; justify-content: center; align-items: center;
     height: 225px; background: #d9d9d9;
 }
